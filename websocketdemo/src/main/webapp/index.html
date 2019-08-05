@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+</head>
+<body>
+
+</body>
+<script>
+    const socket = new WebSocket("ws://localhost:8082/mytest/1")
+    socket.onopen = (ws) => {
+        console.log("建立连接"+ws)
+    }
+    socket.onmessage = (ws) => {
+        console.log("接收到的信息"+ws.data)
+    }
+    socket.onclose = (ws) => {
+        console.log("关闭连接"+ws)
+    }
+    socket.onerror = (ws) => {
+        console.log("发生错误"+ws)
+    }
+
+    setTimeout(()=>{
+        socket.send("开始测试发生一条信息")
+    },2000)
+
+    setTimeout(()=>{
+        socket.close()
+    },5000)
+</script>
+</html>
